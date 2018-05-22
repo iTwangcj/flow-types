@@ -1,6 +1,6 @@
-# Flow types for verdaccio
+# Flow types for ppm
 
-Flow definitions for verdaccio plugins and internal code.
+Flow definitions for ppm plugins and internal code.
 
 
 ## Usage
@@ -9,7 +9,7 @@ To set up the types we need to add them to the `.flowconfig` flow configuration 
 
 ```
 [libs]
-node_modules/@verdaccio/types/lib/
+node_modules/@ppm/types/lib/
 
 [options]
 suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
@@ -18,7 +18,7 @@ suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
 ### Imports
 
 ```
-import type {ILocalData, LocalStorage, Logger, Config} from '@verdaccio/types';
+import type {ILocalData, LocalStorage, Logger, Config} from '@ppm/types';
 
  class LocalData implements ILocalData {
 
