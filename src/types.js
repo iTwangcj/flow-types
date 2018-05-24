@@ -1,6 +1,6 @@
 /* @flow */
 
-declare interface ppm$IUploadTarball extends stream$PassThrough {
+declare interface fem$IUploadTarball extends stream$PassThrough {
     abort: Function;
     done: Function;
     _transform: Function;
@@ -10,38 +10,38 @@ declare interface ppm$IUploadTarball extends stream$PassThrough {
     done (): void;
 }
 
-declare interface ppm$IReadTarball extends stream$PassThrough {
+declare interface fem$IReadTarball extends stream$PassThrough {
     abort: Function;
     
     abort (): void;
 }
 
-declare type ppm$Callback = Function;
+declare type fem$Callback = Function;
 
-declare type ppm$StorageList = Array<string>;
+declare type fem$StorageList = Array<string>;
 
-declare type ppm$LocalStorage = {
-    list: ppm$StorageList;
+declare type fem$LocalStorage = {
+    list: fem$StorageList;
     secret: string;
 }
 
-declare type ppm$Dist = {
+declare type fem$Dist = {
     integrity?: string;
     shasum: string;
     tarball: string;
 }
 
-declare type ppm$Author = {
+declare type fem$Author = {
     name: string;
     email: string;
 }
 
-declare type ppm$Version = {
+declare type fem$Version = {
     name: string,
     version: string,
     devDependencies: string,
     directories: any,
-    dist: ppm$Dist,
+    dist: fem$Dist,
     author: string,
     main: string,
     homemage: string,
@@ -53,23 +53,23 @@ declare type ppm$Version = {
     bugs: any,
     files: Array<string>,
     gitHead: string,
-    maintainers: Array<ppm$Author>,
+    maintainers: Array<fem$Author>,
     repository: string | any,
     scripts: any,
     homepage: string,
-    dist: ppm$Dist,
+    dist: fem$Dist,
     readmeFilename: string;
     etag: string;
-    contributors: Array<ppm$Author>,
+    contributors: Array<fem$Author>,
     dependencies: any,
     keywords: string | Array<string>,
     _id: string,
     nodeVersion: string,
-    _npmUser: ppm$Author,
+    _npmUser: fem$Author,
     _hasShrinkwrap: boolean
 };
 
-declare type ppm$Logger = {
+declare type fem$Logger = {
     child: (conf: any) => any;
     debug: (conf: any, template?: mixed) => void;
     error: (conf: any, template?: mixed) => void;
@@ -79,79 +79,79 @@ declare type ppm$Logger = {
     info: (conf: any, template?: mixed) => void;
 }
 
-declare type ppm$Versions = {
-    [key: string]: ppm$Version;
+declare type fem$Versions = {
+    [key: string]: fem$Version;
 }
 
-declare type ppm$DistFile = {
+declare type fem$DistFile = {
     url: string;
     sha: string;
     registry?: string;
 }
 
-declare type ppm$MergeTags = {
+declare type fem$MergeTags = {
     [key: string]: string;
 }
 
-declare type ppm$DistFiles = {
-    [key: string]: ppm$DistFile;
+declare type fem$DistFiles = {
+    [key: string]: fem$DistFile;
 }
 
-declare type ppm$AttachMents = {
-    [key: string]: ppm$Version;
+declare type fem$AttachMents = {
+    [key: string]: fem$Version;
 }
 
-declare type ppm$GenericBody = {
+declare type fem$GenericBody = {
     [key: string]: string;
 }
 
-declare type ppm$UpLinkMetadata = {
+declare type fem$UpLinkMetadata = {
     etag: string;
     fetched: number;
 }
 
-declare type ppm$UpLinks = {
-    [key: string]: ppm$UpLinkMetadata;
+declare type fem$UpLinks = {
+    [key: string]: fem$UpLinkMetadata;
 }
 
-declare type ppm$Tags = {
-    [key: string]: ppm$Version;
+declare type fem$Tags = {
+    [key: string]: fem$Version;
 }
 
-declare type ppm$Headers = {
+declare type fem$Headers = {
     [key: string]: string;
 }
 
-declare type ppm$Package = {
+declare type fem$Package = {
     _id?: string;
     name: string;
-    versions: ppm$Versions;
-    'dist-tags': ppm$GenericBody;
-    time?: ppm$GenericBody;
+    versions: fem$Versions;
+    'dist-tags': fem$GenericBody;
+    time?: fem$GenericBody;
     readme?: string;
-    _distfiles: ppm$DistFiles;
-    _attachments: ppm$AttachMents;
-    _uplinks: ppm$UpLinks;
+    _distfiles: fem$DistFiles;
+    _attachments: fem$AttachMents;
+    _uplinks: fem$UpLinks;
     _rev: string;
 }
 
-declare interface ppm$ILocalStorage {
+declare interface fem$ILocalStorage {
     add (name: string): void;
     
     remove (name: string): void;
     
-    get (): ppm$StorageList;
+    get (): fem$StorageList;
     
     sync (): void;
 }
 
-declare type ppm$UpLinkTokenConf = {
+declare type fem$UpLinkTokenConf = {
     type: 'Bearer' | 'Basic',
     token?: string,
     token_env?: boolean | string
 }
 
-declare type ppm$UpLinkConf = {
+declare type fem$UpLinkConf = {
     url: string;
     ca?: string;
     cache?: boolean;
@@ -159,60 +159,60 @@ declare type ppm$UpLinkConf = {
     maxage?: string | void;
     max_fails?: number | void;
     fail_timeout?: string | void;
-    headers?: ppm$Headers;
-    auth?: ppm$UpLinkTokenConf;
+    headers?: fem$Headers;
+    auth?: fem$UpLinkTokenConf;
     strict_ssl?: boolean | void;
 }
 
-declare type ppm$PackageAccess = {
+declare type fem$PackageAccess = {
     storage: string;
     publish: string;
     proxy: string;
     access: string;
 }
 
-declare type ppm$PackageList = {
-    [key: string]: ppm$PackageAccess;
+declare type fem$PackageList = {
+    [key: string]: fem$PackageAccess;
 }
 
-declare type ppm$UpLinksConfList = {
-    [key: string]: ppm$UpLinkConf;
+declare type fem$UpLinksConfList = {
+    [key: string]: fem$UpLinkConf;
 }
 
-declare interface ppm$AuthHtpasswd {
+declare interface fem$AuthHtpasswd {
     file: string;
     max_users: string;
 }
 
-declare type ppm$LoggerType = 'stdout' | 'stderr' | 'file';
-declare type ppm$LoggerFormat = 'pretty' | 'pretty-timestamped' | 'file';
-declare type ppm$LoggerLevel = 'http' | 'fatal' | 'warn' | 'info' | 'debug' | 'trace';
+declare type fem$LoggerType = 'stdout' | 'stderr' | 'file';
+declare type fem$LoggerFormat = 'pretty' | 'pretty-timestamped' | 'file';
+declare type fem$LoggerLevel = 'http' | 'fatal' | 'warn' | 'info' | 'debug' | 'trace';
 
-declare type ppm$LoggerConfItem = {
-    type: ppm$LoggerType;
-    format: ppm$LoggerFormat;
-    level: ppm$LoggerLevel;
+declare type fem$LoggerConfItem = {
+    type: fem$LoggerType;
+    format: fem$LoggerFormat;
+    level: fem$LoggerLevel;
 }
 
-declare type ppm$PublishOptions = {
+declare type fem$PublishOptions = {
     allow_offline: boolean;
 }
 
-declare interface ppm$LoggerConf {
-    [key: string]: ppm$LoggerConfItem;
+declare interface fem$LoggerConf {
+    [key: string]: fem$LoggerConfItem;
 }
 
-declare interface ppm$ListenAddress {
+declare interface fem$ListenAddress {
     [key: string]: string;
 }
 
-declare interface ppm$WebConf {
+declare interface fem$WebConf {
     enable: boolean;
     title: string;
     logo: string;
 }
 
-declare interface ppm$HttpsConf {
+declare interface fem$HttpsConf {
     key?: string;
     cert?: string;
     ca?: string;
@@ -220,136 +220,136 @@ declare interface ppm$HttpsConf {
     passphrase?: string;
 }
 
-declare type ppm$AuthConf = any | ppm$AuthHtpasswd;
+declare type fem$AuthConf = any | fem$AuthHtpasswd;
 
-declare type ppm$Notifications = {
+declare type fem$Notifications = {
     method: string;
     packagePattern: RegExp;
     packagePatternFlags: string;
-    headers: ppm$Headers;
+    headers: fem$Headers;
     endpoint: string;
     content: string;
     [key: string]: string;
 }
 
-declare type ppm$ConfigFile = {
+declare type fem$ConfigFile = {
     storage: string;
     self_path: string;
-    packages: ppm$PackageList;
-    uplinks: ppm$UpLinksConfList;
-    logs: Array<ppm$LoggerConf>;
-    web: ppm$WebConf;
-    auth: ppm$AuthConf;
-    publish?: ppm$PublishOptions;
+    packages: fem$PackageList;
+    uplinks: fem$UpLinksConfList;
+    logs: Array<fem$LoggerConf>;
+    web: fem$WebConf;
+    auth: fem$AuthConf;
+    publish?: fem$PublishOptions;
     url_prefix?: string;
-    listen?: ppm$ListenAddress;
-    https?: ppm$HttpsConf;
+    listen?: fem$ListenAddress;
+    https?: fem$HttpsConf;
     http_proxy?: string;
     https_proxy?: string;
     no_proxy?: string;
     max_body_size?: string;
-    notifications: ppm$Notifications;
+    notifications: fem$Notifications;
 }
 
-declare type ppm$Config = {
+declare type fem$Config = {
     user_agent: string;
     server_id: any;
     _debug?: boolean;
     storage: string;
     secret: string;
     self_path: string;
-    packages: ppm$PackageList;
-    uplinks: ppm$UpLinksConfList;
-    logs: Array<ppm$LoggerConf>;
-    web: ppm$WebConf;
-    auth: ppm$AuthConf;
-    publish?: ppm$PublishOptions;
+    packages: fem$PackageList;
+    uplinks: fem$UpLinksConfList;
+    logs: Array<fem$LoggerConf>;
+    web: fem$WebConf;
+    auth: fem$AuthConf;
+    publish?: fem$PublishOptions;
     url_prefix?: string;
     store?: any;
-    listen?: ppm$ListenAddress;
-    https?: ppm$HttpsConf;
+    listen?: fem$ListenAddress;
+    https?: fem$HttpsConf;
     http_proxy?: string;
     https_proxy?: string;
     no_proxy?: string;
     max_body_size?: string;
-    notifications: ppm$Notifications;
+    notifications: fem$Notifications;
     middlewares?: any;
     checkSecretKey: (token: string) => string;
     hasProxyTo (pkg: string, upLink: string): boolean;
-    getMatchedPackagesSpec?: (storage: string) => ppm$PackageAccess;
+    getMatchedPackagesSpec?: (storage: string) => fem$PackageAccess;
 }
 
-declare type ppm$SyncReturn = Error | void;
-declare type ppm$IPackageStorage = ppm$ILocalPackageManager | void;
+declare type fem$SyncReturn = Error | void;
+declare type fem$IPackageStorage = fem$ILocalPackageManager | void;
 
-declare interface ppm$ILocalData {
-    add (name: string, callback: ppm$Callback): void;
+declare interface fem$ILocalData {
+    add (name: string, callback: fem$Callback): void;
     
-    remove (name: string, callback: ppm$Callback): void;
+    remove (name: string, callback: fem$Callback): void;
     
-    get (callback: ppm$Callback): void;
+    get (callback: fem$Callback): void;
     
     getSecret (): Promise<string>;
     
     setSecret (secret: string): Promise<any>;
     
-    getPackageStorage (packageInfo: string): ppm$IPackageStorage;
+    getPackageStorage (packageInfo: string): fem$IPackageStorage;
 }
 
-declare interface ppm$ILocalPackageManager {
-    writeTarball (name: string): ppm$IUploadTarball;
+declare interface fem$ILocalPackageManager {
+    writeTarball (name: string): fem$IUploadTarball;
     
-    readTarball (name: string): ppm$IReadTarball;
+    readTarball (name: string): fem$IReadTarball;
     
-    readPackage (fileName: string, callback: ppm$Callback): void;
+    readPackage (fileName: string, callback: fem$Callback): void;
     
-    createPackage (name: string, value: ppm$Package, cb: ppm$Callback): void;
+    createPackage (name: string, value: fem$Package, cb: fem$Callback): void;
     
-    deletePackage (fileName: string, callback: ppm$Callback): void;
+    deletePackage (fileName: string, callback: fem$Callback): void;
     
-    removePackage (callback: ppm$Callback): void;
+    removePackage (callback: fem$Callback): void;
     
     updatePackage (pkgFileName: string,
-                   updateHandler: ppm$Callback,
-                   onWrite: ppm$Callback,
+                   updateHandler: fem$Callback,
+                   onWrite: fem$Callback,
                    transformPackage: Function,
-                   onEnd: ppm$Callback): void;
+                   onEnd: fem$Callback): void;
     
-    savePackage (fileName: string, json: ppm$Package, callback: ppm$Callback): void;
+    savePackage (fileName: string, json: fem$Package, callback: fem$Callback): void;
 }
 
-declare module '@ppm/local-storage' {
-    declare export type ILocalData = ppm$ILocalData;
-    declare export type IPackageStorage = ppm$IPackageStorage;
-    declare export type ILocalPackageManager = ppm$ILocalPackageManager;
+declare module '@fem/local-storage' {
+    declare export type ILocalData = fem$ILocalData;
+    declare export type IPackageStorage = fem$IPackageStorage;
+    declare export type ILocalPackageManager = fem$ILocalPackageManager;
     
     declare class LocalDatabase<ILocalData> {
-        constructor (config: ppm$Config, logger: ppm$Logger): ILocalData;
+        constructor (config: fem$Config, logger: fem$Logger): ILocalData;
     }
     
     declare module .exports: typeof LocalDatabase
 ;
 }
 
-declare module '@ppm/streams' {
-    declare type IUploadTarball = ppm$IUploadTarball;
-    declare type IReadTarball = ppm$IReadTarball;
+declare module '@fem/streams' {
+    declare type IUploadTarball = fem$IUploadTarball;
+    declare type IReadTarball = fem$IReadTarball;
     
     declare class UploadTarball<ILocalData> {
         abort: Function;
         done: Function;
-        constructor (options: duplexStreamOptions): ppm$IUploadTarball;
-        constructor (): ppm$IUploadTarball;
+        constructor (options: duplexStreamOptions): fem$IUploadTarball;
+        constructor (): fem$IUploadTarball;
     }
     
     declare class ReadTarball<ILocalData> {
         abort: Function;
-        constructor (options: duplexStreamOptions): ppm$IReadTarball;
-        constructor (): ppm$IReadTarball;
+        constructor (options: duplexStreamOptions): fem$IReadTarball;
+        constructor (): fem$IReadTarball;
     }
 }
 
-declare module '@ppm/file-locking' {
+declare module '@fem/file-locking' {
     declare export type LockOptions = {
         lock?: boolean,
         parse?: boolean
@@ -362,36 +362,36 @@ declare module '@ppm/file-locking' {
     declare export function lockFile (name: string, callback: Function): void;
 }
 
-declare module '@ppm/types' {
+declare module '@fem/types' {
     declare export type Stdout = stream$Writable | tty$WriteStream;
     declare export type Stdin = stream$Readable | tty$ReadStream;
-    declare export type Package = ppm$Package;
-    declare export type MergeTags = ppm$MergeTags;
-    declare export type Version = ppm$Version;
-    declare export type Callback = ppm$Callback;
-    declare export type Logger = ppm$Logger;
-    declare export type DistFile = ppm$DistFile;
-    declare export type Versions = ppm$Versions;
-    declare export type Config = ppm$Config;
-    declare export type ConfigFile = ppm$ConfigFile;
-    declare export type LoggerConf = ppm$LoggerConf;
-    declare export type WebConf = ppm$WebConf;
-    declare export type AuthConf = ppm$AuthConf;
-    declare export type PublishOptions = ppm$PublishOptions;
-    declare export type ListenAddress = ppm$ListenAddress;
-    declare export type HttpsConf = ppm$HttpsConf;
-    declare export type Notifications = ppm$Notifications;
-    declare export type Headers = ppm$Headers;
-    declare export type LoggerConfItem = ppm$LoggerConfItem;
-    declare export type LoggerLevel = ppm$LoggerLevel;
-    declare export type LoggerFormat = ppm$LoggerFormat;
-    declare export type LoggerType = ppm$LoggerType;
-    declare export type PackageList = ppm$PackageList;
-    declare export type UpLinksConfList = ppm$UpLinksConfList;
-    declare export type UpLinkMetadata = ppm$UpLinkMetadata;
-    declare export type ILocalStorage = ppm$ILocalStorage;
-    declare export type UpLinkConf = ppm$UpLinkConf;
-    declare export type PackageAccess = ppm$PackageAccess;
-    declare export type StorageList = ppm$StorageList;
-    declare export type LocalStorage = ppm$LocalStorage;
+    declare export type Package = fem$Package;
+    declare export type MergeTags = fem$MergeTags;
+    declare export type Version = fem$Version;
+    declare export type Callback = fem$Callback;
+    declare export type Logger = fem$Logger;
+    declare export type DistFile = fem$DistFile;
+    declare export type Versions = fem$Versions;
+    declare export type Config = fem$Config;
+    declare export type ConfigFile = fem$ConfigFile;
+    declare export type LoggerConf = fem$LoggerConf;
+    declare export type WebConf = fem$WebConf;
+    declare export type AuthConf = fem$AuthConf;
+    declare export type PublishOptions = fem$PublishOptions;
+    declare export type ListenAddress = fem$ListenAddress;
+    declare export type HttpsConf = fem$HttpsConf;
+    declare export type Notifications = fem$Notifications;
+    declare export type Headers = fem$Headers;
+    declare export type LoggerConfItem = fem$LoggerConfItem;
+    declare export type LoggerLevel = fem$LoggerLevel;
+    declare export type LoggerFormat = fem$LoggerFormat;
+    declare export type LoggerType = fem$LoggerType;
+    declare export type PackageList = fem$PackageList;
+    declare export type UpLinksConfList = fem$UpLinksConfList;
+    declare export type UpLinkMetadata = fem$UpLinkMetadata;
+    declare export type ILocalStorage = fem$ILocalStorage;
+    declare export type UpLinkConf = fem$UpLinkConf;
+    declare export type PackageAccess = fem$PackageAccess;
+    declare export type StorageList = fem$StorageList;
+    declare export type LocalStorage = fem$LocalStorage;
 }
