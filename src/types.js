@@ -310,8 +310,8 @@ declare module "@fem/local-storage" {
 }
 
 declare module "@fem/streams" {
-    declare type IUploadTarball = fem$IUploadTarball;
-    declare type IReadTarball = fem$IReadTarball;
+    declare export type IUploadTarball = fem$IUploadTarball;
+    declare export type IReadTarball = fem$IReadTarball;
     declare class UploadTarball<ILocalData>{
         abort: Function;
         done: Function;

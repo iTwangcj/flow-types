@@ -1,6 +1,6 @@
 {
 	"name": "@fem/types",
-	"version": "1.0.3",
+	"version": "1.0.5",
 	"description": "ppm flow types definitions",
 	"main": "lib/index.js",
 	"scripts": {
