@@ -4,16 +4,13 @@ declare interface fem$IUploadTarball extends stream$PassThrough {
     abort: Function;
     done: Function;
     _transform: Function;
-    
-    abort (): void;
-    
-    done (): void;
+    abort(): void;
+    done(): void;
 }
 
 declare interface fem$IReadTarball extends stream$PassThrough {
     abort: Function;
-    
-    abort (): void;
+    abort(): void;
 }
 
 declare type fem$Callback = Function;
@@ -136,17 +133,14 @@ declare type fem$Package = {
 }
 
 declare interface fem$ILocalStorage {
-    add (name: string): void;
-    
-    remove (name: string): void;
-    
-    get (): fem$StorageList;
-    
-    sync (): void;
+    add(name: string): void;
+    remove(name: string): void;
+    get(): fem$StorageList;
+    sync(): void;
 }
 
 declare type fem$UpLinkTokenConf = {
-    type: 'Bearer' | 'Basic',
+    type: "Bearer" | "Basic",
     token?: string,
     token_env?: boolean | string
 }
@@ -156,7 +150,7 @@ declare type fem$UpLinkConf = {
     ca?: string;
     cache?: boolean;
     timeout?: string | void;
-    maxage?: string | void;
+    maxage?: string| void;
     max_fails?: number | void;
     fail_timeout?: string | void;
     headers?: fem$Headers;
@@ -275,94 +269,73 @@ declare type fem$Config = {
     notifications: fem$Notifications;
     middlewares?: any;
     checkSecretKey: (token: string) => string;
-    hasProxyTo (pkg: string, upLink: string): boolean;
+    hasProxyTo(pkg: string, upLink: string): boolean;
     getMatchedPackagesSpec?: (storage: string) => fem$PackageAccess;
 }
 
 declare type fem$SyncReturn = Error | void;
 declare type fem$IPackageStorage = fem$ILocalPackageManager | void;
-
 declare interface fem$ILocalData {
-    add (name: string, callback: fem$Callback): void;
-    
-    remove (name: string, callback: fem$Callback): void;
-    
-    get (callback: fem$Callback): void;
-    
-    getSecret (): Promise<string>;
-    
-    setSecret (secret: string): Promise<any>;
-    
-    getPackageStorage (packageInfo: string): fem$IPackageStorage;
+    add(name: string, callback: fem$Callback): void;
+    remove(name: string, callback: fem$Callback): void;
+    get(callback: fem$Callback): void;
+    getSecret(): Promise<string>;
+    setSecret(secret: string): Promise<any>;
+    getPackageStorage(packageInfo: string): fem$IPackageStorage;
 }
 
 declare interface fem$ILocalPackageManager {
-    writeTarball (name: string): fem$IUploadTarball;
-    
-    readTarball (name: string): fem$IReadTarball;
-    
-    readPackage (fileName: string, callback: fem$Callback): void;
-    
-    createPackage (name: string, value: fem$Package, cb: fem$Callback): void;
-    
-    deletePackage (fileName: string, callback: fem$Callback): void;
-    
-    removePackage (callback: fem$Callback): void;
-    
-    updatePackage (pkgFileName: string,
-                   updateHandler: fem$Callback,
-                   onWrite: fem$Callback,
-                   transformPackage: Function,
-                   onEnd: fem$Callback): void;
-    
-    savePackage (fileName: string, json: fem$Package, callback: fem$Callback): void;
+    writeTarball(name: string): fem$IUploadTarball;
+    readTarball(name: string): fem$IReadTarball;
+    readPackage(fileName: string, callback: fem$Callback): void;
+    createPackage(name: string, value: fem$Package, cb: fem$Callback): void;
+    deletePackage(fileName: string, callback: fem$Callback): void;
+    removePackage(callback: fem$Callback): void;
+    updatePackage(pkgFileName: string,
+                  updateHandler: fem$Callback,
+                  onWrite: fem$Callback,
+                  transformPackage: Function,
+                  onEnd: fem$Callback): void;
+    savePackage(fileName: string, json: fem$Package, callback: fem$Callback): void;
 }
 
-declare module '@fem/local-storage' {
-    declare export type ILocalData = fem$ILocalData;
-    declare export type IPackageStorage = fem$IPackageStorage;
-    declare export type ILocalPackageManager = fem$ILocalPackageManager;
-    
-    declare class LocalDatabase<ILocalData> {
-        constructor (config: fem$Config, logger: fem$Logger): ILocalData;
+declare module "@fem/local-storage" {
+    declare export type ILocalData =  fem$ILocalData;
+    declare export type IPackageStorage =  fem$IPackageStorage;
+    declare export type ILocalPackageManager =  fem$ILocalPackageManager;
+    declare class LocalDatabase<ILocalData>{
+        constructor(config: fem$Config, logger: fem$Logger): ILocalData;
     }
-    
-    declare module .exports: typeof LocalDatabase
-;
+    declare module.exports: typeof LocalDatabase;
 }
 
-declare module '@fem/streams' {
+declare module "@fem/streams" {
     declare type IUploadTarball = fem$IUploadTarball;
     declare type IReadTarball = fem$IReadTarball;
-    
-    declare class UploadTarball<ILocalData> {
+    declare class UploadTarball<ILocalData>{
         abort: Function;
         done: Function;
-        constructor (options: duplexStreamOptions): fem$IUploadTarball;
-        constructor (): fem$IUploadTarball;
+        constructor(options: duplexStreamOptions): fem$IUploadTarball;
+        constructor(): fem$IUploadTarball;
     }
-    
-    declare class ReadTarball<ILocalData> {
+    declare class ReadTarball<ILocalData>{
         abort: Function;
-        constructor (options: duplexStreamOptions): fem$IReadTarball;
-        constructor (): fem$IReadTarball;
+        constructor(options: duplexStreamOptions): fem$IReadTarball;
+        constructor(): fem$IReadTarball;
     }
 }
 
-declare module '@fem/file-locking' {
+declare module "@fem/file-locking" {
     declare export type LockOptions = {
         lock?: boolean,
         parse?: boolean
     };
-    
-    declare export function readFile (name: string, data: any, callback: Function): void;
-    
-    declare export function unlockFile (name: string, callback: Function): void;
-    
-    declare export function lockFile (name: string, callback: Function): void;
+    declare export function readFile(name: string, data: any, callback: Function): void;
+    declare export function unlockFile(name: string, callback: Function): void;
+    declare export function lockFile(name: string, callback: Function): void;
 }
 
-declare module '@fem/types' {
+declare module "@fem/types" {
     declare export type Stdout = stream$Writable | tty$WriteStream;
     declare export type Stdin = stream$Readable | tty$ReadStream;
     declare export type Package = fem$Package;
